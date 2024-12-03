@@ -35,7 +35,7 @@ export default function OrderConfirmed({cart, setCart, open, handleOpen, handleC
                 </section>
 
                 <button
-                    className='bg-darkRed text-Rose50 p-4 rounded-full w-full font-redhat-semibold hover:bg-Rose900'
+                    className='bg-darkRed text-Rose50 p-4 rounded-full w-full font-redhat-semibold hover:bg-Rose900 transition-all'
                     onClick={() => {
                         handleClose();
                         setCart([]);

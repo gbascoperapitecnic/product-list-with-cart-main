@@ -1,61 +1,15 @@
-import { useState } from 'react'
 import './App.css'
 import MenuItem from './components/MenuItem'
 import data from './data/data.json'
 import CartItem from './components/CartItem'
 import { formatCurrency } from './helpers'
 import OrderConfirmed from './components/OrderConfirmed'
+import useCart from './hooks/useCart'
 
 function App() {
 
-  const [cart, setCart] = useState([])
-  // modal
-  const [open, setOpen] = useState(false)
-
-  const handleOpen = ()  =>{
-    setOpen(true)
-  }
-  const handleClose = ()=> {
-    setOpen(false)
-  }
-
-  const isEmpty = cart.length === 0
-
-  console.log(cart)
-
-  const addToCart = (product) => {
-    //comprobar si ya existe 
-    const itemExists = cart.findIndex((item) => item.id == product.id)
-
-    if (itemExists == -1) {
-      product.quantity = 1
-      setCart([...cart, product])
-    }else{
-      //si existe, incrementar cantidad
-      const updatedCart = [...cart]
-      updatedCart[itemExists].quantity++;
-      setCart(updatedCart)
-    }
-  }
-
-  const removeItem = (product) =>{
-    const filteredCart = cart.filter((item)=> item.id !== product.id)
-    setCart(filteredCart)
-  }
-
-  const incrementQuantity = (product) =>{
-    const itemExists = cart.findIndex((item) => item.id == product.id)
-    itemExists !== -1 && setCart([...cart], [...cart][itemExists].quantity++)
-  }
-  const decrementQuantity = (product) =>{
-    const itemExists = cart.findIndex((item) => item.id == product.id)
-    itemExists !== -1 && setCart([...cart], [...cart][itemExists].quantity--)
-
-    if (product.quantity === 0) {
-      removeItem(product)
-    }
-  }
-
+  const { cart, setCart, open, handleOpen, handleClose, isEmpty, addToCart, removeItem, incrementQuantity, decrementQuantity} = useCart()
+  
   return (
     <>
       <h1 className='text-4xl font-bold text-left p-4'>Desserts</h1>
@@ -117,8 +71,8 @@ function App() {
                 </div>
 
                 <button
-                  className='bg-darkRed text-Rose50 p-4 rounded-full w-full font-redhat-semibold hover:bg-Rose900'
-                  onClick={handleOpen}
+                  className='bg-darkRed text-Rose50 p-4 rounded-full w-full font-redhat-semibold hover:bg-Rose900 transition-all'
+                  onClick={handleOpen}black
                 >
                   Confirm Order
                 </button>

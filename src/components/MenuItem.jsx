@@ -33,7 +33,7 @@ export default function MenuItem({item, cart, addToCart, incrementQuantity, decr
                         <>
                             <img src={item.image.desktop} alt=""  className="w-full rounded-xl"/>
                             <button
-                                className="rounded-full border-darkRed border bg-Rose50 font-semibold mx-auto px-6 py-3 relative bottom-6 flex items-center gap-3"
+                                className="rounded-full border-darkRed border bg-Rose50 font-semibold mx-auto px-6 py-3 relative bottom-6 flex items-center gap-3 hover:text-darkRed transition-all"
                                 onClick={() => addToCart(item)}
                             >
                                 <img src="/public/images/icon-add-to-cart.svg" alt="" />
