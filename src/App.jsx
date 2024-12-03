@@ -21,21 +21,17 @@ function App() {
 
   const isEmpty = cart.length === 0
 
-
-
-  // setCart(['asdfsdf'])
-  // console.log(data)
   console.log(cart)
 
   const addToCart = (product) => {
-    //comprobar si ya existe el elemento
+    //comprobar si ya existe 
     const itemExists = cart.findIndex((item) => item.id == product.id)
 
     if (itemExists == -1) {
       product.quantity = 1
       setCart([...cart, product])
     }else{
-      //si existe, incrementar cantidad del item
+      //si existe, incrementar cantidad
       const updatedCart = [...cart]
       updatedCart[itemExists].quantity++;
       setCart(updatedCart)
@@ -54,19 +50,24 @@ function App() {
   const decrementQuantity = (product) =>{
     const itemExists = cart.findIndex((item) => item.id == product.id)
     itemExists !== -1 && setCart([...cart], [...cart][itemExists].quantity--)
+
+    if (product.quantity === 0) {
+      removeItem(product)
+    }
   }
 
   return (
     <>
-      <h1 className='text-3xl font-bold text-left p-4'>Desserts</h1>
+      <h1 className='text-4xl font-bold text-left p-4'>Desserts</h1>
       
-      <section className='flex'>
-        <div className='grid grid-cols-3 mt-5'>
+      <section className='grid lg:grid-cols-4 sm:grid-cols-1'>
+        <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 lg:col-span-3 sm:col-span-4 mt-5'>
           {
             data.map((item) => 
               <MenuItem 
                 key={item.id}
                 item={item}
+                cart={cart}
                 addToCart={addToCart}
                 incrementQuantity={incrementQuantity}
                 decrementQuantity={decrementQuantity}
@@ -77,7 +78,7 @@ function App() {
           }        
         </div>
 
-        <div className='bg-green-500 rounded-2xl p-6 min-w-[23rem] shadow-sm bg-[white]'>
+        <div className='bg-green-500 rounded-2xl p-6 shadow-sm bg-[white] min-w-full'>
           <h2 className='text-darkRed text-left text-3xl font-redhat-semibold'>Your Cart ({cart.length})</h2>
           <div className='mt-3'>
             {

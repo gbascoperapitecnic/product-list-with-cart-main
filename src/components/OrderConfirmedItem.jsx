@@ -1,8 +1,9 @@
 import { formatCurrency } from "../helpers";
+import { cn } from "../lib/utils";
 
-export default function OrderConfirmedItem({item}) {
+export default function OrderConfirmedItem({item, cart}) {
   return (
-    <div className="border-b-Rose500  pb-4 border-opacity-10 border-b-[1px] p-2">  
+    <div className={cn("pb-4 border-opacity-10 p-2", cart.length > 1 && "border-b-[1px] border-b-Rose500" )} >  
         <div className="flex justify-between items-center">
             <div className="flex items-center gap-3">
                 <img src={item.image.thumbnail} alt="" className="max-w-14 rounded-md"/>

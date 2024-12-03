@@ -7,7 +7,7 @@ export default function OrderConfirmed({cart, setCart, open, handleOpen, handleC
     <Modal
         onClose={handleClose}
         open={open}
-        className="flex justify-center items-center mx-auto max-w-[33rem]"
+        className="flex flex-col sm:justify-center items-center mx-auto max-w-[33rem] justify-end"
     >
         <div className="bg-Rose50 p-7 rounded-xl w-full flex flex-col gap-4">
             <div className="pb-3">
@@ -17,12 +17,13 @@ export default function OrderConfirmed({cart, setCart, open, handleOpen, handleC
             </div>
 
             <div className="flex flex-col gap-4">
-                <div className="bg-Rose100 rounded-md p-3 flex flex-col gap-4">
+                <div className="bg-Rose100 rounded-md p-3 flex flex-col gap-4 max-h-72 overflow-scroll">
                     {
                         cart.map((item) =>
                             <OrderConfirmedItem 
                                 key={item.id}
                                 item={item}
+                                cart={cart}
                             />
                         )
                     }
